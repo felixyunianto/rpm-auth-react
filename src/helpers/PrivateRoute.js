@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        currentUser.token === null ? (
+        currentUser === null ? (
           <Redirect to="/sign-in" />
         ) : (
           <Component {...props} />

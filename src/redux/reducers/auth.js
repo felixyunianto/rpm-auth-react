@@ -64,6 +64,16 @@ const auth = (state = initialState, { type, payload }) => {
         isAuthenticated: true,
         isFulfilled: true,
       };
+    case actionAuth.authSignOut:
+      return {
+        user: null,
+        isAuthenticated: false,
+        msgInvalid: "",
+        status: {},
+        isPending: false,
+        isFulfilled: false,
+        isRejected: false,
+      };
     default:
       return state;
   }

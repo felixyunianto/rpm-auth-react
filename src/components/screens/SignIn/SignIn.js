@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SignIn.css";
 import igPhoneImages from "../../../assets/ig-phone.png";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authSignInAction } from "../../../redux/actions/auth";
 
-const SignIn = () => {
+const SignIn = (props) => {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = () => {
+    dispatch(authSignInAction({ email, password })).then((data) => {
+      console.log(data);
+    });
+    props.history.push("/");
+  };
+
   return (
     <div>
       <section className="text-gray-600 body-font relative text-center">
@@ -23,6 +36,8 @@ const SignIn = () => {
                   name="email"
                   placeholder="Phone number, username, or email"
                   className="w-full bg-white rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                 />
               </div>
               <div className="relative mb-4">
@@ -32,9 +47,14 @@ const SignIn = () => {
                   name="password"
                   placeholder="Password"
                   className="w-full bg-white rounded border border-gray-300 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                 />
               </div>
-              <button className="text-white w-full bg-blue-400 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded text-lg">
+              <button
+                onClick={handleSubmit}
+                className="text-white w-full bg-blue-400 border-0 py-2 px-6 focus:outline-none hover:bg-blue-500 rounded text-lg"
+              >
                 Sign In
               </button>
               <div className="separator font-bold text-gray-500">OR</div>

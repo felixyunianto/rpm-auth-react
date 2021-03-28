@@ -14,3 +14,9 @@ export const authsignUpAction = (data) => {
         payload: authSignUp(data)
     }
 }
+
+export const authSignOutAction = () => {
+    return {
+        type : actionAuth.authSignOut
+    }
+}
